@@ -56,8 +56,8 @@
     align-items: center;
 }
 
-.cpu-info-sub,
-.user-info-sub {
+#cpu-info-sub,
+#user-info-sub {
     padding-top: 20px;
 }
 
