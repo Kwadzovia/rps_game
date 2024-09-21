@@ -1,8 +1,3 @@
-//#TODO ADD PLAY AGAIN
-//#TODO ADD CPU Choice icons
-//#TODO ADD WIN/Loss Message
-//#TODO ADD ROUND NUMBER
-
 const maxRounds = 5;
 
 let humanChoice = null;
@@ -13,61 +8,76 @@ let gameRound = 0;
 
 let humanScoreSelector = document.querySelector("#user-info-sub");
 let cpuScoreSelector = document.querySelector("#cpu-info-sub");
+let roundSelector = document.querySelector("#round-number");
+let gameStatusSelector = document.querySelector("#game-status");
+let cpuImgSelector = null;
 
 console.log("---------- Rock Paper Scissors :) ----------");
 
-// Step 2: Write the logic to get the computer choice
 function getComputerChoice() {
-    let temp = Math.floor(Math.random() * 3);
-    switch (temp) {
-        default:
-        // When Math.random() returns 1
-        case 2:
-            return ("rock");
-        case 1:
-            return ("paper");
-        case (0):
-            return ("scissors");
+    if (cpuImgSelector) {
+        cpuImgSelector.style.backgroundColor = null;
     }
+    let temp = Math.floor(Math.random() * 3);
+    let tempChoice = null;
+    switch (temp) {
+        case 2:
+            tempChoice = "rock";
+            break;
+        case 1:
+            tempChoice = "paper";
+            break;
+        case (0):
+            tempChoice = "scissors";
+            break;
+    }
+
+    cpuImgSelector = document.querySelector("#cpu-" + tempChoice + "-img");
+    cpuImgSelector.style.backgroundColor = "rgba(167, 70, 70, 0.2)";
+    return tempChoice;
 }
 
 function playRound(humanChoice) {
     computerChoice = getComputerChoice();
     console.log(`you chose: ${humanChoice}\ncpu chose: ${computerChoice}`);
     gameRound++;
+    roundSelector.textContent = `Round ${gameRound}`;
+    let return_value = null;
 
     if (humanChoice === computerChoice) {
-        return "draw";
+        return_value = "draw";
     }
 
     if (humanChoice === "rock") {
         if (computerChoice === "paper") {
-            return "loss";
+            return_value = "loss";
         }
         else {
-            return "win";
+            return_value = "win";
         }
     }
     else if (humanChoice === "paper") {
         if (computerChoice === "scissors") {
-            return "loss";
+            return_value = "loss";
         }
         else {
-            return "win";
+            return_value = "win";
         }
     }
     else if (humanChoice === "scissors") {
         if (computerChoice === "rock") {
-            return "loss";
+            return_value = "loss";
         }
         else {
-            return "win";
+            return_value = "win";
         }
     }
     else {
         console.error("invalid choice");
-        return "draw";
+        return_value = "draw";
     }
+    gameStatusSelector.textContent = return_value;
+    return return_value;
 }
 
 let userInputSelector = document.querySelector("#userbox-id");
@@ -84,13 +94,13 @@ userInputSelector.addEventListener("click", (e) => {
     e.target.style.backgroundColor = "rgba(0, 255, 153, 0.218)";
 
     switch (e.target.id) {
-        case "rock-img":
+        case "user-rock-img":
             humanChoice = "rock";
             break;
-        case "paper-img":
+        case "user-paper-img":
             humanChoice = "paper";
             break;
-        case "scissors-img":
+        case "user-scissors-img":
             humanChoice = "scissors";
             break;
         default:
@@ -121,13 +131,18 @@ userInputSelector.addEventListener("click", (e) => {
         // Game winner printout
         if (gameRound === maxRounds) {
             if (humanScore > computerScore) {
-                console.log("---------- You WIN ----------");
+                gameStatusSelector.textContent = "You WIN";
+                gameStatusSelector.style.backgroundColor = "rgba(72, 154, 79, 0.2)";
+
             }
-            else if (humanScore < computerChoice) {
-                console.log("---------- You lost... ----------");
+            else if (humanScore < computerScore) {
+                gameStatusSelector.textContent = "You lost...";
+                gameStatusSelector.style.backgroundColor = "rgba(167, 70, 70, 0.2)";
+
             }
             else {
-                console.log("---------- Its a draw. ----------");
+                gameStatusSelector.textContent = "It's a draw.";
+                gameStatusSelector.style.backgroundColor = "rgba(110, 119, 68, 0.2)";
             }
         }
     }

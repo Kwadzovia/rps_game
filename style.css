@@ -30,9 +30,19 @@
 
 .title {
     margin-top: 12vh;
-    padding-bottom: 15vh;
+    padding-bottom: 8vh;
     font-size: 2.5rem;
     font-weight: 700;
+}
+
+#game-status {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+#round-number {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .game-info-container {
@@ -64,5 +74,20 @@
 .userbox {
     display: flex;
     flex: 0 1 100px;
-    margin-bottom: 10vh;
+    max-height: 25vh;
+    margin-top: auto;
+    /* margin-bottom: 10vh; */
+}
+
+.cpubox {
+    display: flex;
+    padding-top: 2rem;
+    margin-bottom: 8rem;
+}
+
+#cpu-rock-img,
+#cpu-paper-img,
+#cpu-scissors-img {
+    width: 50%;
+    height: 50%;
 }
