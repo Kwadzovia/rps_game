@@ -66,38 +66,38 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
-    for (i = 0; i < 5; i++) {
-        console.log("Round " + i);
-        humanChoice = getHumanChoice();
-        computerChoice = getComputerChoice();
+    // for (i = 0; i < 5; i++) {
+    console.log("Round " + i);
+    humanChoice = getHumanChoice();
+    computerChoice = getComputerChoice();
 
-        switch (playRound(humanChoice, computerChoice)) {
-            default:
-            case "draw":
-                console.log("D");
-                break;
-            case "win":
-                console.log("W");
-                humanScore++;
-                break;
-            case "loss":
-                console.log("L");
-                computerScore++;
-                break;
-        }
-
-        console.log(`Your score: ${humanScore}\nCpu Score: ${computerScore}`);
+    switch (playRound(humanChoice, computerChoice)) {
+        default:
+        case "draw":
+            console.log("D");
+            break;
+        case "win":
+            console.log("W");
+            humanScore++;
+            break;
+        case "loss":
+            console.log("L");
+            computerScore++;
+            break;
     }
 
-    if (humanScore > computerScore) {
-        console.log("You WIN");
-    }
-    else if (humanScore < computerChoice) {
-        console.log("You lost...");
-    }
-    else {
-        console.log("Its a draw.");
-    }
+    console.log(`Your score: ${humanScore}\nCpu Score: ${computerScore}`);
 }
+
+if (humanScore > computerScore) {
+    console.log("You WIN");
+}
+else if (humanScore < computerChoice) {
+    console.log("You lost...");
+}
+else {
+    console.log("Its a draw.");
+}
+// }
 
 playGame();
